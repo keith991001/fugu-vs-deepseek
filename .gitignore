@@ -1,0 +1,11 @@
+# Secrets -- never commit real keys
+.env
+
+# Run outputs (contain your specific results; regenerate locally)
+results.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

@@ -1,0 +1,110 @@
+{
+  "_comment": "15 self-judgeable tasks. Each has a single verifiable answer so a third person can grade without running code. Categories map to the benchmarks discussed: algo (LiveCodeBench), reasoning (GPQA-style proxy), debug (SWE-Bench-style proxy). These are PROXIES, not true benchmark difficulty -- see README.",
+  "tasks": [
+    {
+      "id": "algo-1",
+      "category": "algo",
+      "prompt": "Given the array [10, 9, 2, 5, 3, 7, 101, 18], what is the length of the longest strictly increasing subsequence? Answer with a single integer.",
+      "reference_answer": "4",
+      "grading_hint": "e.g. [2,3,7,101] or [2,3,7,18]. Correct iff final answer is 4."
+    },
+    {
+      "id": "algo-2",
+      "category": "algo",
+      "prompt": "What is the minimum edit distance (Levenshtein) between the strings \"horse\" and \"ros\"? Answer with a single integer.",
+      "reference_answer": "3",
+      "grading_hint": "Classic answer is 3."
+    },
+    {
+      "id": "algo-3",
+      "category": "algo",
+      "prompt": "Using coins of denominations [1, 2, 5], what is the fewest number of coins needed to make the amount 11? Answer with a single integer.",
+      "reference_answer": "3",
+      "grading_hint": "5+5+1 = 3 coins."
+    },
+    {
+      "id": "algo-4",
+      "category": "algo",
+      "prompt": "In the array [2, 7, 11, 15, 1, 8, 7], how many pairs of indices (i, j) with i < j satisfy nums[i] + nums[j] == 9? Answer with a single integer.",
+      "reference_answer": "3",
+      "grading_hint": "Pairs: (2+7 at idx0,1), (2+7 at idx0,6), (1+8 at idx4,5) => 3."
+    },
+    {
+      "id": "algo-5",
+      "category": "algo",
+      "prompt": "You climb a staircase of 5 steps, taking either 1 or 2 steps at a time. How many distinct ways are there to reach the top? Answer with a single integer.",
+      "reference_answer": "8",
+      "grading_hint": "Fibonacci: 1,2,3,5,8 -> 8 ways."
+    },
+    {
+      "id": "reason-1",
+      "category": "reasoning",
+      "prompt": "A car starts from rest and accelerates uniformly at 3 m/s^2 for 4 seconds. How far does it travel in that time? Give the number in meters.",
+      "reference_answer": "24",
+      "grading_hint": "s = 0.5 * a * t^2 = 0.5*3*16 = 24 m."
+    },
+    {
+      "id": "reason-2",
+      "category": "reasoning",
+      "prompt": "What is the pH of a 0.001 M aqueous solution of HCl (a strong acid) at 25 C? Give a single number.",
+      "reference_answer": "3",
+      "grading_hint": "pH = -log10(0.001) = 3."
+    },
+    {
+      "id": "reason-3",
+      "category": "reasoning",
+      "prompt": "A molecule has 3 stereocenters and no internal symmetry. What is the maximum number of stereoisomers it can have? Answer with a single integer.",
+      "reference_answer": "8",
+      "grading_hint": "2^3 = 8."
+    },
+    {
+      "id": "reason-4",
+      "category": "reasoning",
+      "prompt": "Two fair six-sided dice are rolled. What is the probability that the sum of the two dice equals 7? Give the answer as a simplified fraction.",
+      "reference_answer": "1/6",
+      "grading_hint": "6 favorable / 36 = 1/6. Accept 0.1667 too."
+    },
+    {
+      "id": "reason-5",
+      "category": "reasoning",
+      "prompt": "What is the derivative of f(x) = x * ln(x) with respect to x? Give the expression.",
+      "reference_answer": "ln(x) + 1",
+      "grading_hint": "Product rule: 1*ln(x) + x*(1/x) = ln(x) + 1."
+    },
+    {
+      "id": "debug-1",
+      "category": "debug",
+      "prompt": "This Python function should return the sum of all integers from 1 to n inclusive, but it returns the wrong value. Find the bug and give the corrected function.\n\ndef sum_to_n(n):\n    total = 0\n    for i in range(n):\n        total += i\n    return total",
+      "reference_answer": "range(n) should be range(1, n+1) (or range(n+1)); it currently sums 0..n-1, missing n.",
+      "grading_hint": "Correct iff they change range(n) to range(1, n+1) or range(n+1)."
+    },
+    {
+      "id": "debug-2",
+      "category": "debug",
+      "prompt": "This Python function has a subtle bug where calls accumulate results across invocations. Identify the bug and give the corrected function.\n\ndef add_item(item, bucket=[]):\n    bucket.append(item)\n    return bucket",
+      "reference_answer": "Mutable default argument. Fix: bucket=None, then if bucket is None: bucket = [].",
+      "grading_hint": "Correct iff they replace the mutable default [] with None + initialize inside."
+    },
+    {
+      "id": "debug-3",
+      "category": "debug",
+      "prompt": "This Python function should return True only for even numbers, but it is wrong. Find the bug and give the corrected function.\n\ndef is_even(n):\n    return n % 2 == 1",
+      "reference_answer": "Should be n % 2 == 0.",
+      "grading_hint": "Correct iff they change == 1 to == 0."
+    },
+    {
+      "id": "debug-4",
+      "category": "debug",
+      "prompt": "This recursive Python function is supposed to compute factorial but crashes with infinite recursion. Find the bug and give the corrected function.\n\ndef factorial(n):\n    return n * factorial(n - 1)",
+      "reference_answer": "Missing base case. Fix: if n <= 1: return 1, then return n * factorial(n-1).",
+      "grading_hint": "Correct iff they add a base case (n == 0 or n <= 1 returns 1)."
+    },
+    {
+      "id": "debug-5",
+      "category": "debug",
+      "prompt": "This Python function compares two strings for equal content but sometimes returns False for equal strings. Find the bug and give the corrected function.\n\ndef same_text(a, b):\n    return a is b",
+      "reference_answer": "'is' checks identity, not equality. Fix: use a == b.",
+      "grading_hint": "Correct iff they replace 'is' with '=='."
+    }
+  ]
+}
